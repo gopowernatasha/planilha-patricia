@@ -332,6 +332,19 @@ SUSTENTAAAAA!!</div><div class="cp-actions"><div class="cp-videos"><span class="
 'use strict';
 var __st=document.getElementById('cp-static'); if(__st&&__st.parentNode) __st.parentNode.removeChild(__st);
 
+
+/* ============ PERSONALIZAÇÃO (edite aqui) ============ */
+var CONFIG = {
+  nomeAluna: 'Patrícia Simas',
+  fase: '',
+  whatsapp: '',  /* só dígitos, com DDI. ex: '5511999999999'. Vazio = sem link */
+  codigoAcesso: 'patricia'  /* código pedido na entrada do site. Vazio = sem tela de acesso */
+};
+/* ===================================================== */
+
+var STORAGE_KEY = 'treino-progresso-patricia-1';
+var RING_C = 326.73;
+var PANDA = 'https://player-vz-16ac2433-c49.tv.pandavideo.com.br/embed/?v=';
 /* ---------- tela de acesso exclusivo (só quando o JS roda, ou seja, no navegador) ---------- */
 (function(){
   var code = (CONFIG.codigoAcesso || '').trim();
@@ -362,18 +375,6 @@ var __st=document.getElementById('cp-static'); if(__st&&__st.parentNode) __st.pa
   document.getElementById('cp-gate-in').addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
 })();
 
-/* ============ PERSONALIZAÇÃO (edite aqui) ============ */
-var CONFIG = {
-  nomeAluna: 'Patrícia Simas',
-  fase: '',
-  whatsapp: '',  /* só dígitos, com DDI. ex: '5511999999999'. Vazio = sem link */
-  codigoAcesso: 'patricia'  /* código pedido na entrada do site. Vazio = sem tela de acesso */
-};
-/* ===================================================== */
-
-var STORAGE_KEY = 'treino-progresso-patricia-1';
-var RING_C = 326.73;
-var PANDA = 'https://player-vz-16ac2433-c49.tv.pandavideo.com.br/embed/?v=';
 
 var VIDEO_LINKS = [
   "6d909c60-5370-4e63-af46-a8a2d8c52144","7e5e7bf0-fbf6-4d30-b2c3-28594d318b14","b6df13e9-4184-4fc5-88f9-5685b77d0c5e","5b3d8a9b-a84a-45a8-a68e-c87fb10ec77d","7f5724b4-0a3d-4965-af77-bb63fc4db303","763deaea-d8b6-4234-b68f-53c79ebe9800","97a4298b-32e0-4b62-9471-57f6d363accd","145c23db-1036-4a3d-ac5e-46882a5b63b7",
