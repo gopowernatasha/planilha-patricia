@@ -332,11 +332,42 @@ SUSTENTAAAAA!!</div><div class="cp-actions"><div class="cp-videos"><span class="
 'use strict';
 var __st=document.getElementById('cp-static'); if(__st&&__st.parentNode) __st.parentNode.removeChild(__st);
 
+/* ---------- tela de acesso exclusivo (só quando o JS roda, ou seja, no navegador) ---------- */
+(function(){
+  var code = (CONFIG.codigoAcesso || '').trim();
+  if (!code) return;
+  var AK = 'cp-acesso-' + STORAGE_KEY;
+  try { if (localStorage.getItem(AK) === 'ok') return; } catch(e) {}
+  function norm(s){ s = (s || '').toLowerCase(); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch(e) {} return s.replace(/\s+/g, ''); }
+  var ov = document.createElement('div');
+  ov.id = 'cp-gate';
+  ov.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(70% 45% at 12% -2%, rgba(168,139,239,.22), transparent 60%),radial-gradient(62% 42% at 100% 8%, rgba(255,201,163,.24), transparent 58%),linear-gradient(180deg,#FDFBFF 0%,#F6F1FC 46%,#FBF4FB 100%)';
+  ov.innerHTML = '<div style="max-width:320px;width:100%;text-align:center;background:#FFFFFF;border:1px solid #E4DAF8;border-radius:22px;padding:30px 24px;box-shadow:0 1px 2px rgba(33,24,51,.04),0 18px 42px -22px rgba(91,54,196,.28)">'
+    + '<div style="font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#6E6288;margin-bottom:10px">Treinadora Natasha Moraes</div>'
+    + '<div style="font-family:\'Fraunces\',serif;font-size:26px;font-weight:600;background:linear-gradient(105deg,#5B36C4 0%,#7B52E1 45%,#C750A0 90%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px">Acesso exclusivo</div>'
+    + '<div style="font-size:13px;color:#6E6288;font-weight:600;line-height:1.5;margin-bottom:18px">Essa planilha é individual, feita só pra você. Digite seu código de acesso:</div>'
+    + '<input id="cp-gate-in" type="text" autocomplete="off" autocapitalize="none" placeholder="código de acesso" style="width:100%;box-sizing:border-box;font-size:16px;padding:13px 14px;border-radius:12px;border:1px solid #E4DAF8;background:#F6F1FC;text-align:center;outline:none;color:#211833">'
+    + '<div id="cp-gate-err" style="display:none;font-size:12px;color:#C2371B;font-weight:700;margin-top:10px">Código incorreto. Confere com a Natasha 💜</div>'
+    + '<button id="cp-gate-btn" style="width:100%;margin-top:14px;padding:14px;border:0;border-radius:999px;background:linear-gradient(135deg,#7B52E1,#C750A0);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">Entrar</button></div>';
+  document.body.appendChild(ov);
+  function go(){
+    if (norm(document.getElementById('cp-gate-in').value) === norm(code)) {
+      try { localStorage.setItem(AK, 'ok'); } catch(e) {}
+      ov.parentNode.removeChild(ov);
+    } else {
+      document.getElementById('cp-gate-err').style.display = 'block';
+    }
+  }
+  document.getElementById('cp-gate-btn').addEventListener('click', go);
+  document.getElementById('cp-gate-in').addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+})();
+
 /* ============ PERSONALIZAÇÃO (edite aqui) ============ */
 var CONFIG = {
   nomeAluna: 'Patrícia Simas',
   fase: '',
-  whatsapp: ''  /* só dígitos, com DDI. ex: '5511999999999'. Vazio = sem link */
+  whatsapp: '',  /* só dígitos, com DDI. ex: '5511999999999'. Vazio = sem link */
+  codigoAcesso: 'patricia'  /* código pedido na entrada do site. Vazio = sem tela de acesso */
 };
 /* ===================================================== */
 
