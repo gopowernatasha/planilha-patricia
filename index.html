@@ -117,6 +117,32 @@ button{touch-action:manipulation}
 <div style="position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 42%, transparent 58%, rgba(91,54,196,.06) 100%)"></div>
 <div id="cp-wrap" style="position:relative;z-index:1;max-width:520px;margin:0 auto;padding-bottom:56px">
 
+  <div id="cp-aviso-icone" hidden style="margin:18px 18px 0;background:#FFFFFF;border:1px solid #E4DAF8;border-radius:20px;padding:16px;box-shadow:0 1px 2px rgba(33,24,51,.04),0 18px 42px -22px rgba(91,54,196,.28);position:relative;overflow:hidden">
+    <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#7B52E1,#FFC9A3 55%,#FF7A1A)"></div>
+    <div style="display:flex;gap:13px;align-items:flex-start">
+      <img src="apple-touch-icon.png" alt="" style="width:46px;height:46px;border-radius:11px;flex:none;box-shadow:0 4px 10px -2px rgba(91,54,196,.35)">
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:800;font-size:14.5px;color:#211833;margin-bottom:4px">Sua planilha ganhou um ícone novo 💜</div>
+        <div style="font-size:13px;line-height:1.55;color:#6E6288;font-weight:600">Pra ele aparecer na sua tela de início: <b style="color:#5B36C4">1.</b> segure o dedo no atalho antigo e toque em <b style="color:#5B36C4">Excluir Favorito</b>; <b style="color:#5B36C4">2.</b> abra este link no Safari, toque em <b style="color:#5B36C4">Compartilhar</b> e depois em <b style="color:#5B36C4">Adicionar à Tela de Início</b>.</div>
+        <div style="display:flex;gap:16px;align-items:center;margin-top:12px">
+          <button id="cp-aviso-ok" style="border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:12.5px;color:#FFFFFF;padding:10px 16px;border-radius:999px;background:linear-gradient(115deg,#5B36C4,#7B52E1 55%,#A88BEF 135%);box-shadow:0 8px 20px -8px rgba(91,54,196,.55)">Pronto, já troquei ✨</button>
+          <button id="cp-aviso-depois" style="border:none;background:transparent;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:700;font-size:12.5px;color:#6E6288;text-decoration:underline;text-underline-offset:3px;padding:8px 0">Depois</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var el=document.getElementById('cp-aviso-icone');
+    try{
+      var ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
+      if(ios && new Date()<new Date('2026-09-01') && localStorage.getItem('cp-aviso-icone')!=='ok' && sessionStorage.getItem('cp-aviso-icone')!=='depois'){ el.hidden=false; }
+      document.getElementById('cp-aviso-ok').onclick=function(){ try{localStorage.setItem('cp-aviso-icone','ok');}catch(e){} el.hidden=true; };
+      document.getElementById('cp-aviso-depois').onclick=function(){ try{sessionStorage.setItem('cp-aviso-icone','depois');}catch(e){} el.hidden=true; };
+    }catch(e){}
+  })();
+  </script>
+
   <div id="cp-head" style="padding:48px 24px 26px;text-align:center">
     <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:16px">
       <span style="height:1px;flex:1;max-width:64px;background:linear-gradient(90deg,transparent,#A88BEF)"></span>
